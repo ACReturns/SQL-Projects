@@ -38,39 +38,17 @@ INSERT INTO tbl_class
 
 SELECT * FROM tbl_class;
 
+UPDATE tbl_class SET class_type = 'birds' WHERE class_type = 'bird'; --updating 'birds' to 'bird'. This is permanent
+
+SELECT REPLACE(class_type, 'bird', 'birds') FROM tbl_class; --replaces 'birds' to 'bird'. This is temporary
+SELECT class_type FROM tbl_class WHERE class_type = 'bird';
+SELECT UPPER(class_type) FROM tbl_class WHERE class_type = 'bird';
+SELECT COUNT(class_type) FROM tbl_class WHERE class_type = 'bird';
+
 CREATE TABLE tbl_order
 (
 	order_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
 	order_type VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE tbl_care
-(
-	care_id VARCHAR(50) PRIMARY KEY NOT NULL,
-	care_type VARCHAR(50) NOT NULL,
-	care_specialist INT NOT NULL
-);
-
-CREATE TABLE tbl_nutrition
-(
-	nutrition_id INT PRIMARY KEY NOT NULL IDENTITY(2200,1),
-	nutrition_type VARCHAR(50) NOT NULL,
-	nutrition_cost MONEY NOT NULL
-);
-
-CREATE TABLE tbl_habitat
-(
-	habitat_id INT PRIMARY KEY NOT NULL IDENTITY (5000,1),
-	habitat_type VARCHAR(50) NOT NULL,
-	habitat_cost MONEY NOT NULL
-);
-
-CREATE TABLE tbl_specialist
-(
-	specialist_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
-	specialist_fname VARCHAR(50) NOT NULL,
-	specialist_lname VARCHAR(50) NOT NULL,
-	specialist_contact VARCHAR(50) NOT NULL
 );
 
 INSERT INTO tbl_order
@@ -80,8 +58,14 @@ INSERT INTO tbl_order
 	('herbivore'),
 	('omnivore')
 ;
-
 SELECT * FROM tbl_order;
+
+CREATE TABLE tbl_care
+(
+	care_id VARCHAR(50) PRIMARY KEY NOT NULL,
+	care_type VARCHAR(50) NOT NULL,
+	care_specialist INT NOT NULL
+);
 
 INSERT INTO tbl_care
 	(care_id, care_type, care_specialist)
@@ -95,10 +79,69 @@ INSERT INTO tbl_care
 	('care_6', 'drain and refill aquarium', 1),
 	('care_7', 'extensive dental work', 3)
 ;
-
+SELECT * FROM tbl_care;
 UPDATE tbl_care SET care_id = 'care_5' WHERE care_id = 'care_';  
 
-SELECT * FROM tbl_care;
+CREATE TABLE tbl_nutrition
+(
+	nutrition_id INT PRIMARY KEY NOT NULL IDENTITY(2200,1),
+	nutrition_type VARCHAR(50) NOT NULL,
+	nutrition_cost MONEY NOT NULL
+);
+
+INSERT INTO tbl_nutrition	
+	(nutrition_type, nutrition_cost)
+	VALUES
+	('raw fish', 1500),
+	('living rodents', 600),
+	('mixture of fruit and rice', 800),
+	('warm bottle of milk', 600),
+	('syringe fed broth', 600),
+	('lard and seed mix', 300),
+	('aphids', 150),
+	('vitamins and marrow', 3500)
+;
+SELECT * FROM tbl_nutrition;
+
+CREATE TABLE tbl_habitat
+(
+	habitat_id INT PRIMARY KEY NOT NULL IDENTITY (5000,1),
+	habitat_type VARCHAR(50) NOT NULL,
+	habitat_cost MONEY NOT NULL
+);
+
+INSERT INTO tbl_habitat
+	(habitat_type, habitat_cost)
+	VALUES
+	('tundra', 40000),
+	('grassy knoll with trees', 12000),
+	('10ft pond and rocks', 30000),
+	('icy aquarium with snowy facade', 50000),
+	('short grass, shade and moat', 50000),
+	('netted forest atrium', 10000),
+	('jungle vines and winding branches', 15000),
+	('cliff with shaded cave', 15000)
+;
+SELECT * FROM tbl_habitat;
+
+CREATE TABLE tbl_specialist
+(
+	specialist_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
+	specialist_fname VARCHAR(50) NOT NULL,
+	specialist_lname VARCHAR(50) NOT NULL,
+	specialist_contact VARCHAR(50) NOT NULL
+);
+
+INSERT INTO tbl_specialist
+	(specialist_fname, specialist_lname, specialist_contact)
+	VALUES
+	('margaret', 'nguyen', '384-576-2899'),
+	('mary', 'fischer', '384-784-4856'),
+	('arnold', 'holden', '385-475-3944'),
+	('kem', 'byesan', '384-485-4855'),
+	('delmonte', 'fyedo', '768-288-3749')
+;
+SELECT * FROM tbl_specialist;
 
 CREATE TABLE tbl_species
 (
@@ -125,90 +168,35 @@ INSERT INTO tbl_species
 	('grey wolf', 1, 102, 1, 5000, 2201, 'care_4')
 ;
 SELECT * FROM tbl_species;
+UPDATE tbl_species SET species_name = 'ghost bat' WHERE species_name = 'ghost_bat';  -- fix typo 
+SELECT * FROM tbl_species WHERE species_name = 'chicken';
 
-INSERT INTO tbl_nutrition	
-	(nutrition_type, nutrition_cost)
-	VALUES
-	('raw fish', 1500),
-	('living rodents', 600),
-	('mixture of fruit and rice', 800),
-	('warm bottle of milk', 600),
-	('syringe fed broth', 600),
-	('lard and seed mix', 300),
-	('aphids', 150),
-	('vitamins and marrow', 3500)
-;
-SELECT * FROM tbl_nutrition;
-
-INSERT INTO tbl_habitat
-	(habitat_type, habitat_cost)
-	VALUES
-	('tundra', 40000),
-	('grassy knoll with trees', 12000),
-	('10ft pond and rocks', 30000),
-	('icy aquarium with snowy facade', 50000),
-	('short grass, shade and moat', 50000),
-	('netted forest atrium', 10000),
-	('jungle vines and winding branches', 15000),
-	('cliff with shaded cave', 15000)
-;
-SELECT * FROM tbl_habitat;
-
-INSERT INTO tbl_specialist
-	(specialist_fname, specialist_lname, specialist_contact)
-	VALUES
-	('margaret', 'nguyen', '384-576-2899'),
-	('mary', 'fischer', '384-784-4856'),
-	('arnold', 'holden', '385-475-3944'),
-	('kem', 'byesan', '384-485-4855'),
-	('delmonte', 'fyedo', '768-288-3749')
-;
-SELECT * FROM tbl_specialist;
-
-
-
-
-
-
-
-UPDATE tbl_class SET class_type = 'birds' WHERE class_type = 'bird'; --updating 'birds' to 'bird'. This is permanent
-
-SELECT REPLACE(class_type, 'bird', 'birds') FROM tbl_class; --replaces 'birds' to 'bird'. This is temporary
-
-SELECT class_type FROM tbl_class WHERE class_type = 'bird';
-
-SELECT UPPER(class_type) FROM tbl_class WHERE class_type = 'bird';
-
-SELECT COUNT(class_type) FROM tbl_class WHERE class_type = 'bird';
-
-CREATE TABLE tbl_persons
-(
-	persons_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
-	persons_fname VARCHAR(50) NOT NULL,
-	persons_lname VARCHAR(50) NOT NULL,
-	persons_contact VARCHAR(50) NOT NULL
-);
-
-INSERT INTO tbl_persons
-	(persons_fname, persons_lname, persons_contact)
-	VALUES
-	('bob', 'smith', '232-345-5678'),
-	('mary', 'ann', '232-345-5678'),
-	('tex', 'burns', '232-345-5678'),
-	('gerry', 'kerns', '232-345-5678'),
-	('sally', 'fields', '232-345-5678')
+SELECT
+	a1.species_name, a2.animalia_type,
+	a3.class_type, a4.order_type, a5.habitat_type,
+	a6.nutrition_type, a7.care_type
+	FROM tbl_species a1
+	INNER JOIN tbl_animalia a2 ON a2.animalia_id = a1.species_animalia
+	INNER JOIN tbl_class a3 ON a3.class_id = a1.species_class
+	INNER JOIN tbl_order a4 ON a4.order_id = a1.species_order
+	INNER JOIN tbl_habitat a5 ON a5.habitat_id = a1.species_habitat
+	INNER JOIN tbl_nutrition a6 ON a6.nutrition_id = a1.species_nutrition
+	INNER JOIN tbl_care a7 ON a7.care_id = a1.species_care
+	WHERE species_name = 'brown bear'
 ;
 
-SELECT * FROM tbl_persons;
+SELECT
+	a1.species_name, a2.habitat_type, a2.habitat_cost, 
+	a3.nutrition_type, a3.nutrition_cost
+	FROM tbl_species a1
+	INNER JOIN tbl_habitat a2 ON a2.habitat_id = a1.species_habitat
+	INNER JOIN tbl_nutrition a3 ON a3.nutrition_id = a1.species_nutrition
+	WHERE species_name = 'ghost bat'
+;
 
-UPDATE tbl_persons SET persons_fname = 'mars' WHERE persons_fname = 'bob';
+SELECT * FROM tbl_nutrition
+INNER JOIN tbl_species ON tbl_species.species_nutrition = tbl_nutrition.nutrition_id;
 
-SELECT persons_fname, persons_lname, persons_contact FROM tbl_persons WHERE persons_id BETWEEN 2 AND 5;
-SELECT persons_fname, persons_lname, persons_contact FROM tbl_persons WHERE persons_lname LIKE 'ke%';
 
-SELECT persons_fname AS 'First Name', persons_lname AS 'Last Name', persons_contact AS 'Phone' FROM tbl_persons WHERE persons_fname LIKE 'm%' ORDER BY persons_lname;
-
-DELETE FROM tbl_persons WHERE persons_lname = 'smith'; -- How to delete your data
-
-DROP TABLE tbl_persons;
-
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES tbl_species)
+	DROP TABLE tbl_species, tbl_animalia, tbl_care, tbl_class, tbl_habitat, tbl_nutrition, tbl_order, tbl_specialist;
