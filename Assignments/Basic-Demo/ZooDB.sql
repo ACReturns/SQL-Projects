@@ -107,6 +107,7 @@ BEGIN
 		('vitamins and marrow', 3500)
 	;
 	SELECT * FROM tbl_nutrition;
+	SELECT nutrition_type FROM tbl_nutrition WHERE nutrition_cost <= 600.00;
 
 	CREATE TABLE tbl_habitat
 	(
@@ -175,6 +176,7 @@ BEGIN
 	SELECT * FROM tbl_species;
 	UPDATE tbl_species SET species_name = 'ghost bat' WHERE species_name = 'ghost_bat';  -- fix typo 
 	SELECT * FROM tbl_species WHERE species_name = 'chicken';
+	SELECT species_name FROM tbl_species WHERE species_order = 3;
 
 	SELECT
 		a1.species_name, a2.animalia_type,
@@ -211,6 +213,15 @@ BEGIN
 		INNER JOIN tbl_habitat a2 ON a2.habitat_id = a1.species_habitat
 		INNER JOIN tbl_nutrition a3 ON a3.nutrition_id = a1.species_nutrition
 		WHERE species_name = 'ghost bat'
+	;
+
+	SELECT species_name FROM tbl_species
+	INNER JOIN tbl_nutrition ON species_nutrition BETWEEN 2202 AND 2206
+	GROUP BY species_name; -- Adding GROUP BY with the species name reduces clutter from the multiple name usage 
+
+	SELECT species_name AS 'Species Name:', nutrition_type AS 'Nutrition Type:', nutrition_id
+	FROM tbl_species a1
+	INNER JOIN tbl_nutrition a2 ON a2.nutrition_type = a1.species_care
 	;
 
 	/*

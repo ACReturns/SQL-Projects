@@ -35,6 +35,7 @@ ELSE
 		PRINT 'Variable 1 is not ' + CONVERT(VARCHAR(5), @var1) + CHAR(13)
 	END
 
+
 DECLARE @var3 INT, @var4 INT
 SET @var3 = 3
 SET @var4 = 5
