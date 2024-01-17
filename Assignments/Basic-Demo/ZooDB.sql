@@ -217,11 +217,36 @@ BEGIN
 
 	SELECT species_name FROM tbl_species
 	INNER JOIN tbl_nutrition ON species_nutrition BETWEEN 2202 AND 2206
-	GROUP BY species_name; -- Adding GROUP BY with the species name reduces clutter from the multiple name usage 
+	GROUP BY species_name; -- Adding GROUP BY with the species name reduces clutter from the multiple name usage
+	/*This does work in clearing duplicates BUT it's unnecessary if the INNER JOIN is on child_table.foreign_key = parent_table.primary key
+	Also, if you selected more than one column from the species table, this strategy of using GROUP BY species_name would not work and 
+	would throw an error unless you included the other columns in the GROUP BY as well.*/
 
-	SELECT species_name AS 'Species Name:', nutrition_type AS 'Nutrition Type:', nutrition_id
-	FROM tbl_species a1
-	INNER JOIN tbl_nutrition a2 ON a2.nutrition_type = a1.species_care
+	SELECT species_name
+	FROM tbl_species
+	INNER JOIN tbl_nutrition ON species_nutrition = nutrition_id
+	Where nutrition_id BETWEEN 2202 AND 2206;
+	-- This is how you narrow down the search between specified id numbers
+
+	SELECT species_name AS 'Species Name:', nutrition_type AS 'Nutrition Type:'
+	FROM tbl_species
+	INNER JOIN tbl_nutrition ON nutrition_id = species_nutrition
+	WHERE species_name LIKE '%';
+	-- This is how you get 2 rows in a table
+
+	SELECT a1.specialist_fname, a1.specialist_lname, a1.specialist_contact, 
+	a2.species_name, a3.care_specialist 
+	FROM tbl_specialist a1 
+	INNER JOIN tbl_species a2 ON a2.species_id = a1.specialist_id 
+	INNER JOIN tbl_care a3 ON a3.care_specialist = a1.specialist_id 
+	WHERE a2.species_name = 'penguin' ;
+	-- Specify how to view the specialist that takes care of only penguins
+
+	SELECT specialist_fname, specialist_lname, specialist_contact
+	FROM tbl_specialist
+	INNER JOIN tbl_care ON care_specialist = specialist_id
+	INNER JOIN tbl_species ON species_care = care_id
+	WHERE species_name = 'penguin'
 	;
 
 	/*
