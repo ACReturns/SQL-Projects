@@ -1,0 +1,13 @@
+USE AdventureWorks2017
+GO
+CREATE PROCEDURE dbo.uspGetAddress
+AS 
+SELECT * FROM Person.Address
+GO
+EXEC dbo.uspGetAddress
+
+DROP PROCEDURE IF EXISTS dbo.uspGetAddress
+
+CREATE SCHEMA [ACADEMY_HR] AUTHORIZATION [dbo]
+
+DROP SCHEMA IF EXISTS [ACADEMY_HR]
