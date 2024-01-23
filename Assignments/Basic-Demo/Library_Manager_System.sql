@@ -23,6 +23,21 @@ CREATE TABLE Publisher
 	PublisherPhone VARCHAR(50) NOT NULL
 );
 
+INSERT INTO Publisher VALUES
+('', '', ''),
+('', '', ''),
+('', '', ''),
+('', '', ''),
+('', '', ''),
+('', '', ''),
+('', '', ''),
+('', '', ''),
+('', '', ''),
+('', '', '')
+;
+
+SELECT * FROM Publisher;
+
 CREATE TABLE Books
 (
 	BookID INT PRIMARY KEY NOT NULL IDENTITY (1,1),
@@ -38,7 +53,18 @@ CREATE TABLE Borrower
 	BorrowerPhone VARCHAR(25) NOT NULL
 );
 
+INSERT INTO Borrower VALUES
+('Roger Grey', '5 Tomoato Lane', '(917) 534-9989'),
+('Lean Spot', '101 Vibing Road', '(719) 438-9421'),
+('Sol Badguy', '6 Gunflame Alley', '(212) 337-7070'),
+('Laila Cerda', '77 Healing Way', '(989) 776-9321'),
+('Viviana Smith', '4225 Pecan Street', '(743) 777-2543'),
+('Domon Kasshu', '13 King of Hearts Blvd', '(343) 438-1313'),
+('Leonardo DaVinci', '8 Artists Alley', '(576) 897-3456'),
+('Bruce Wayne', '1 Wayne Manor', '(643) 978-9432')
+;
 
+SELECT * FROM Borrower;
 
 CREATE TABLE Book_Copies
 (
