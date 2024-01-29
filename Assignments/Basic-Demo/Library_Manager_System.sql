@@ -16,6 +16,8 @@ INSERT INTO Library_Branch VALUES
 
 SELECT * FROM Library_Branch;
 
+SELECT COUNT(BranchName) FROM Library_Branch;
+
 CREATE TABLE Publisher
 (
 	PublisherName VARCHAR(50) PRIMARY KEY NOT NULL,
@@ -102,7 +104,8 @@ INSERT INTO Book_Copies VALUES
 (9, 1, 8),
 (3, 4, 4),
 (16, 5, 10),
-(6, 1, 5)
+(6, 1, 5),
+(1, 6, 7)
 ;
 
 SELECT * FROM Book_Copies;
@@ -154,6 +157,4 @@ SELECT * FROM Book_Authors;
 
 SELECT * FROM ((Book_Loans FULL OUTER JOIN Borrower ON Book_Loans.CardNo =
 Borrower.CardNo) FULL OUTER JOIN Books ON Book_Loans.BookID = Books.BookID)
-
-SELECT * FROM Books
-INNER JOIN Book_Authors ON 
+ 
